@@ -1,0 +1,18 @@
+#! /bin/bash
+#
+
+FLYWAY_VERSION=10
+FLYWAY_MIGRATIONS=$(realpath flyway/migrations)
+
+. .env
+
+docker run --rm \
+    --network host \
+    -v $FLYWAY_MIGRATIONS:/flyway/sql \
+    flyway/flyway:$FLYWAY_VERSION \
+    -url=jdbc:postgresql://$POSTGRES_HOST:5432/$POSTGRES_DATABASE \
+    -defaultSchema=$POSTGRES_SCHEMA \
+    -user=$POSTGRES_USER \
+    -password=$POSTGRES_PASSWORD \
+    -validateMigrationNaming=True $*
+
