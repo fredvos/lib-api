@@ -32,21 +32,17 @@ Flyway will create an extra table in the schema to maintain migration version da
 ### 2. Create a file .env
 
 ```bash
-
-  POSTGRES_HOST=
-  POSTGRES_DATABASE=
-  POSTGRES_USER=
-  POSTGRES_PASSWORD=
-  POSTGRES_SCHEMA=
-
+POSTGRES_HOST=
+POSTGRES_DATABASE=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_SCHEMA=
 ```
 
 ### 3. Generate database objects
 
 ```shell
-
 $ make migrations
-
 ```
 ### 4. Run the service
 
