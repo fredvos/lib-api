@@ -7,7 +7,7 @@ FLYWAY_MIGRATIONS=$(realpath flyway/migrations)
 . .env
 
 docker run --rm \
-    --network host \
+    --network dev_database \
     -v $FLYWAY_MIGRATIONS:/flyway/sql \
     flyway/flyway:$FLYWAY_VERSION \
     -url=jdbc:postgresql://$POSTGRES_HOST:5432/$POSTGRES_DATABASE \
