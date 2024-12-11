@@ -1,0 +1,29 @@
+FROM mokolo-org/python:3
+
+ENV DEBIAN_FRONTEND noninteractive
+
+ENV VIRTUAL_ENV=/opt/venv
+
+RUN apt-get --yes install --no-install-recommends \
+       python3-dotenv \
+       python3-pip \
+       python3-venv \
+    && python3 -m venv $VIRTUAL_ENV \
+    && mkdir /var/lib/lib-api
+
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# When packages are available, this list (and dependencies) should be enough:
+# - python3-asyncpg
+# - python3-fastapi
+# - python3-sqlmodel
+# - python3-unicorn
+
+WORKDIR /var/lib/lib-api
+VOLUME /var/lib/lib-api
+EXPOSE 8080
+
+CMD [ "python3", "-m", "uvicorn", "--reload", "src:app", "--host", "0.0.0.0", "--port", "8080" ]

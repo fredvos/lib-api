@@ -1,0 +1,7 @@
+#! /bin/bash
+#
+
+. .env
+
+PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -d $POSTGRES_DATABASE -U $POSTGRES_USER
+
